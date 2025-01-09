@@ -1,0 +1,51 @@
+﻿function fact(n)
+    if(n==0) then return 1
+    else return n*fact(n-1)
+    end
+end
+
+local x = 5
+
+print("Factorial of " .. x .. " is " .. fact(x))
+
+function PrintString(s)
+    print(s .. ", " .. "length- " .. #s)
+end
+
+s1 = "a string"
+s2 = string.gsub(s1, "a", "another")
+PrintString(s1)
+PrintString(s2)
+
+
+--v = require 'vectors'
+
+f = loadfile 'vectors'
+v = f()
+a = v.new(1, 2, 3)
+b = v.new(4, 5, 6)
+sum = v.add(a, b)
+sub = v.sub(b, a)
+
+n = v.nor(a)
+
+print(a * 2)
+print(2 * a)
+
+print(v.up)
+
+print("Length of the vector ({sum.x} equals " .. v.len(sum))
+
+allPositive = function(t)
+    local i = 0
+    return function()
+        i = i + 1
+        if(t[i] > 0) then return t[i] end
+    end
+end
+
+t = {1, 2, 0, -1}
+for n in allPositive(t) do
+    print(n)
+end
+    

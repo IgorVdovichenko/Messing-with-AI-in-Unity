@@ -1,0 +1,72 @@
+﻿{
+  "RootNodeId": "D_enemy_spotted",
+  
+  "Parameters": 
+          [
+            {
+              "Id": "Target_spotted",
+              "Type": "Boolean"
+            },
+            {
+              "Id": "Target_Health",
+              "Type": "Float"
+            },
+            {
+              "Id": "DistanceToTarget",
+              "Type": "Float"
+            }
+          ],
+  
+  "Decisions": 
+          [
+            {
+              "Id": "D_enemy_spotted",
+              "TrueNodeId": "D_enemy_near",
+              "FalseNodeId": "A_idle",
+              "Conditions":
+              [
+                {
+                  "ParameterId": "Target_spotted",
+                  "Value": "true"
+                },
+                {
+                  "ParameterId": "Target_Health",
+                  "ConditionType": "Greater",
+                  "Value": 20
+                },
+                {
+                  "ParameterId": "DistanceToTarget",
+                  "ConditionType": "LessOrEquals",
+                  "Value": 10
+                }
+              ]
+            },
+            
+            {
+              "Id": "D_enemy_near",
+              "TrueNodeId": "A_attack",
+              "FalseNodeId": "A_run",
+              "Conditions":
+              [
+                {
+                  "ParameterId": "DistanceToTarget",
+                  "ConditionType": "LessOrEquals",
+                  "Value": 0.5
+                }
+              ]
+            }
+          ],
+  
+  "Actions": 
+          [
+            {
+              "Id": "A_idle"
+            },
+            {
+              "Id": "A_run"
+            },
+            {
+              "Id": "A_attack"
+            }
+          ]
+}

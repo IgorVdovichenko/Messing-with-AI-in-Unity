@@ -1,0 +1,3 @@
+﻿agent.PlayAnimation("Run")
+MoveToTarget()
+ai.speed = 5

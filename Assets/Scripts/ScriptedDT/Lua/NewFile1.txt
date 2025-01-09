@@ -1,0 +1,88 @@
+﻿-- Id's of the actions
+local idle = "idle"
+local run = "run"
+local attack = "attack"
+
+-- Id's of the decisions
+local spotted = "spotted"
+local reached = "reached"
+
+-- fields for the decision table
+local trueId = "trueId"
+local falseId = "falseId"
+local condition = "condition"
+
+-- define decision tree
+
+dt = {}
+
+-- actions
+
+dt[idle] = {}
+dt[run] = {}
+dt[attack] = {}
+
+-- decisions
+
+dt[spotted] = {}
+dt[reached] = {}
+
+getNode = function(nodeId)
+                   if(dt[nodeId][condition]()) == true
+                    then return dt[nodeId][trueId]
+                    else return dt[nodeId][falseId]
+                   end
+              end
+
+-- define actions
+
+dt[idle][run] = function()
+                     agent.PlayAnimation("Idle")
+                     agent.Stop()                                      
+                     agent.speed = 3.5                                      
+                  end                                                     
+                
+dt[run][run] = function()
+                    agent.PlayAnimation("Run")
+                    agent.MoveToTarget()
+                    agent.speed = 5
+               end
+               
+dt[attack][run] = function()
+                    agent.PlayAnimation("Attack")
+                    agent.Stop()
+                    agent.speed = 3.5
+                  end
+
+-- define decisions
+
+dt[spotted][trueId] = reached
+dt[spotted][falseId] = idle
+
+dt[spotted][condition] = function()
+                    return target.spotted() == true and
+                    target.health() >= 20.0 and
+                    target.distanceTo() <= 10.0
+                end
+                
+dt[spotted][run] = function()
+             dt[getNode(spotted)].run()
+          end
+          
+          
+dt[reached][trueId] = attack
+dt[reached][falseId] = run
+
+dt[reached][condition] = function()
+                    return target.distanceTo() <= 0.5
+                end
+                
+dt[reached][run] = function()
+              dt[getNode(reached)].run()
+            end
+
+-- Assign root of the decision tree
+root = spotted
+
+-- run the decision tree
+dt[root].run()

@@ -1,0 +1,8 @@
+﻿f = loadfile("vectors");
+vec = f();
+
+
+a = vec.new(1, -1, 0)
+b = vec.new(-2, 0, 1)
+sum = vec.add(a, b)
+assert(sum.x == -1 and sum.y == -1 and sum.z == 1, "sum does not work correctly")

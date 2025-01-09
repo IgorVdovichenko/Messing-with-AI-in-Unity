@@ -1,0 +1,2 @@
+﻿agent.PlayAnimation("Attack")
+agent.Stop()

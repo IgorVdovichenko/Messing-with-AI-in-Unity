@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e8ac4078f654056892575f1a0077a8d, type: 3}
+  m_Name: Sitting Audience
+  m_EditorClassIdentifier: 
+  Clips:
+  - {fileID: -203655887218126122, guid: 5fcd5c376d8eaa84ca35c349d0e1d93f, type: 3}
+  - {fileID: -501205059944107688, guid: bee33ba317a10ad4caf93fe3e70cc955, type: 3}
+  - {fileID: -203655887218126122, guid: 6da44910b6cec1a4899924f1caec7c45, type: 3}
+  - {fileID: -203655887218126122, guid: 9e284940852c01648ad79f05abbed6a8, type: 3}
+  - {fileID: -203655887218126122, guid: 6a7b4c3e49ea9f145841202f380ebca1, type: 3}
+  - {fileID: 4637745809603780968, guid: 9a5f9d998a9622d4fb38bbcbc166ab13, type: 3}

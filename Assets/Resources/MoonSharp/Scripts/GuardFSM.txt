@@ -1,0 +1,41 @@
+﻿local idle = "idle"
+local run = "run"
+local attack = "attack"
+
+local OnEnter = "OnEnter"
+local OnExit = "OnExit"
+local OnUpdate = "OnUpdate"
+
+local currState
+
+local fsm = {}
+
+local idleState = {}
+idleState.OnEnter = function()
+        agent.PlayAnimation("Run")
+        agent.Stop()
+        agent.speed = 3.5
+    end
+idleState.OnExit = function() print("exited idle") end
+idleState.OnUpdate = function() print("updated idle") end
+
+
+local runState = {}
+runState.OnEnter = function()
+        agent.PlayAnimation("Run")
+        agent.speed = 5
+    end
+runState.OnUpdate = function()
+        agent.MoveToTarget()
+    end
+
+local setState = function(s)
+    --currState.OnExit()
+    currState = s
+    currState.OnEnter()
+end
+
+local run = function() currState.OnUpdate() end
+
+setState(idleState)
+run()

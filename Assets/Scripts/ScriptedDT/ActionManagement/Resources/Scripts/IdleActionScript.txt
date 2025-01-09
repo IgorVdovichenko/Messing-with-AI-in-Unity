@@ -1,0 +1,3 @@
+﻿agent.PlayAnimation("Idle")
+agent.Stop()
+ai.speed = 3.5

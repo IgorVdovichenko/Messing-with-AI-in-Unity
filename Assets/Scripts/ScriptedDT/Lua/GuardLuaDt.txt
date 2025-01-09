@@ -1,0 +1,57 @@
+﻿-- Id's of the actions
+local idle = "idle"
+local run = "run"
+local attack = "attack"
+
+-- Id's of the decisions
+local spotted = "spotted"
+local reached = "reached"
+
+-- define actions
+
+actions = {}
+
+actions[idle] = function()
+                    agent.PlayAnimation("Idle")
+                    agent.Stop()
+                    agent.speed = 3.5
+                end
+                
+actions[run] = function()
+                    agent.PlayAnimation("Run")
+                    agent.MoveToTarget()
+                    agent.speed = 5
+               end
+               
+actions[attack] = function()
+                    agent.PlayAnimation("Attack")
+                    agent.Stop()
+                    agent.speed = 3.5
+                  end
+
+-- define decisions
+
+decisions = {}
+
+decisions[spotted] = {
+    trueId = reached,
+    falseId = idle,
+    condition = function()
+                    return target.spotted() == true and
+                    target.health() >= 20.0 and
+                    target.distanceTo() <= 10.0
+                end
+}
+
+decisions[reached] = {
+    trueId = attack,
+    falseId = run,
+    condition = function()
+                    return target.distanceTo() <= 0.5
+                end
+}
+
+-- Assign root of the decision tree
+root = spotted
+
+--actions.attack()
